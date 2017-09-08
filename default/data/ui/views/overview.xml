@@ -169,7 +169,7 @@
       <table>
         <title>Tunnel Downtime</title>
         <search>
-          <query>`aviatrix_log` | transaction src_gw dst_gw startswith="new_state=Down" endswith="new_state=Up" | stats sum(eval(round((duration/3600),2))) AS Downtime(hours) by src_gw, dst_gw | rename src_gw AS Gateway1, dst_gw AS Gateway2</query>
+          <query>`aviatrix_log` AviatrixTunnelStatusChange | transaction src_gw dst_gw startswith="new_state=Down" endswith="new_state=Up" | stats sum(eval(round((duration/3600),2))) AS Downtime(hours) by src_gw, dst_gw | rename src_gw AS Gateway1, dst_gw AS Gateway2</query>
           <earliest>$tunneltime.earliest$</earliest>
           <latest>$tunneltime.latest$</latest>
         </search>
